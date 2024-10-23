@@ -17,7 +17,7 @@ export default function ListingCard({ listing }) {
       {/* Image Container */}
       <div className="relative h-64 overflow-hidden">
         {listing.images && listing.images.length > 0 ? (
-          <img
+          <Image
             src={listing.images[0]}
             alt={listing.title}
             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"

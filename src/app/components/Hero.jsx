@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
@@ -23,7 +24,7 @@ export default function Hero() {
   return (
     <section className="relative bg-gray-900 h-[600px]">
       <div className="absolute inset-0">
-        <img
+        <Image
           src={images[currentImage]}
           alt="Dynamic city skyline"
           className="w-full h-full object-cover"
