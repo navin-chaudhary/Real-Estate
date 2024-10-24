@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect,useCallback  } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import ListingCard from './ListingCard';
 import ListingFilters from './ListingFilters';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
@@ -165,15 +165,7 @@ const SAMPLE_LISTINGS = [
   },
 ];
 
-export default function ListingGrid({ listings }) {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [sortBy, setSortBy] = useState('featured');
-  const [filteredAndSortedListings, setFilteredAndSortedListings] = useState([]);
-  const [filters, setFilters] = useState({
-    propertyTypes: [],
-    bedrooms: '',
-    priceRange: { min: '', max: '' },
-  });
+export default function ListingGrid() {
   const [listingState, setListingState] = useState({
     currentPage: 1,
     sortBy: 'featured',
@@ -251,8 +243,9 @@ export default function ListingGrid({ listings }) {
           ...prevState,
           filteredAndSortedListings: sortedListings
         }));
-      } catch (err) {
+      } catch (error) {
         setError("Failed to fetch listings");
+        console.error('Error processing listings:', error);
       } finally {
         setLoading(false);
       }
@@ -273,7 +266,6 @@ export default function ListingGrid({ listings }) {
     }));
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
-
   return (
     <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8">
       <div className="mb-6 md:mb-0 md:px-4 md:border-r md:border-gray-200 dark:md:border-gray-700 md:pr-8">

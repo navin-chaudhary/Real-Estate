@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { Bed, Bath, Square, MapPin, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const ListingCard = ({ listing, onNavigate }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -36,7 +37,7 @@ const ListingCard = ({ listing, onNavigate }) => {
       <div className="relative h-64 overflow-hidden">
         {listing.images?.[0] ? (
           <div className="relative w-full h-full">
-            <img
+            <Image
               src={listing.images[0]}
               alt={listing.title} // Consider making this more descriptive
               className={`w-full h-full object-cover transition-transform duration-500 

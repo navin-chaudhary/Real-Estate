@@ -43,7 +43,7 @@ const AboutPage = () => {
               Finding Your Dream Home Made Simple
             </h1>
             <p className="text-xl mb-8">
-              We're on a mission to help everyone find their perfect place to call home through innovation and dedication.
+              We&apos;re on a mission to help everyone find their perfect place to call home through innovation and dedication.
             </p>
           </div>
         </div>
@@ -103,8 +103,8 @@ const AboutPage = () => {
               Our team of experts is here to help you every step of the way.
             </p>
             <Link
-            href="/contact"
-            className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors dark:bg-blue-500 dark:hover:bg-blue-600">
+              href="/contact"
+              className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors dark:bg-blue-500 dark:hover:bg-blue-600">
               Contact Us Today
             </Link>
           </div>
