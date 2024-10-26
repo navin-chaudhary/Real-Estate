@@ -31,12 +31,12 @@ export default function Navbar() {
   const navLinks = [
     { href: '/', label: 'HOME' },
     { href: '/about', label: 'ABOUT' },
-    { href: '/listings', label: 'PROPERTY' },
+    { href: '/property', label: 'PROPERTY' },
     { href: '/contact', label: 'CONTACT US' },
   ];
 
   return (
-    <nav className="sticky top-0 z-50 transition-colors duration-300 ease-in-out bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 shadow-lg">
+    <nav className="sticky top-0 z-50 transition-colors duration-300 ease-in-out bg-gradient-to-b bg-[#ada7a7] dark:from-gray-900 dark:to-gray-800 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -65,7 +65,7 @@ export default function Navbar() {
                 <span className="absolute inset-x-0 bottom-0 h-0.5 bg-blue-600 transform scale-x-0 origin-left transition-transform duration-300 ease-out group-hover:scale-x-100"></span>
               </Link>
             ))}
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-all duration-200 transform hover:scale-105 hover:shadow-lg text-sm lg:text-base font-medium">
+            <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-all duration-200 transform hover:scale-105 hover:shadow-lg text-sm lg:text-base tracking-wider uppercase  font-medium">
               List Property
             </button>
             

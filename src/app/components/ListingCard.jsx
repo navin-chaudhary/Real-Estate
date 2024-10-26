@@ -21,9 +21,6 @@ const ListingCard = ({ listing, onNavigate }) => {
       onNavigate(listing.id);
     }
   };
-
-  
-
   return (
     <div 
       className="group relative bg-white dark:bg-gray-800 shadow-md hover:shadow-xl 
@@ -37,12 +34,14 @@ const ListingCard = ({ listing, onNavigate }) => {
       <div className="relative h-64 overflow-hidden">
         {listing.images?.[0] ? (
           <div className="relative w-full h-full">
-            <Image
+           { (listing.images.length > 0 &&<Image
               src={listing.images[0]}
+              width={1000}
+              height={1000}
               alt={listing.title} // Consider making this more descriptive
               className={`w-full h-full object-cover transition-transform duration-500 
                          ${isHovered ? 'scale-110' : 'scale-100'}`}
-            />
+            />)}
             <div className={`absolute inset-0 bg-black transition-opacity duration-300
                            ${isHovered ? 'opacity-20' : 'opacity-0'}`} />
           </div>
@@ -79,8 +78,8 @@ const ListingCard = ({ listing, onNavigate }) => {
           <p className="text-sm line-clamp-1">{listing.location}</p>
         </div>
 
-        <div className="grid grid-cols-3 gap-2 mt-4 text-gray-600 dark:text-gray-300 text-sm">
-          <div className="flex items-center space-x-1">
+        <div className="grid grid-cols-3 gap-[2px] mt-4  text-gray-600 dark:text-gray-300 text-sm">
+          <div className="flex items-center space-x-1 ">
             <Bed className="w-4 h-4" />
             <span>{listing.beds || 0} Beds</span>
           </div>
@@ -88,9 +87,9 @@ const ListingCard = ({ listing, onNavigate }) => {
             <Bath className="w-4 h-4" />
             <span>{listing.baths || 0} Baths</span>
           </div>
-          <div className="flex items-center space-x-1">
+          <div className="flex items-center space-x-1  w-[100px]">
             <Square className="w-4 h-4" />
-            <span>{listing.sqft || 0} sqft</span>
+            <span className=''>{listing.sqft || 0} sqft</span>
           </div>
         </div>
 

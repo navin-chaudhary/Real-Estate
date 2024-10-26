@@ -6,11 +6,14 @@ export default function FeaturedListings() {
       id: 1,
       title: "Modern Downtown Apartment",
       location: "123 Main St, City",
-      price: "250,000",
+      price: 250000,
       beds: 2,
-      baths: 2
+      baths: 2,
+      sqft: 1200,
+      type: "apartment",
+      images: ["https://images.pexels.com/photos/28389059/pexels-photo-28389059.jpeg?auto=compress&cs=tinysrgb&w=600"]
     },
-    // Add more sample listings
+    
   ]
 
   return (

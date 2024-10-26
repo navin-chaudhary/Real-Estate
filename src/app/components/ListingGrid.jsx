@@ -11,7 +11,7 @@ const SAMPLE_LISTINGS = [
     id: 1,
     title: "Modern Downtown Apartment",
     location: "123 Main St, New York",
-    price: 450000, // Price as a number
+    price: 450000, 
     beds: 2,
     baths: 2,
     featured:true,
@@ -23,7 +23,7 @@ const SAMPLE_LISTINGS = [
     id: 2,
     title: "Modern Downtown Apartment",
     location: "123 Main St, New York",
-    price: 450000, // Price as a number
+    price: 450000, 
     beds: 2,
     baths: 3,
     featured:true,
@@ -35,7 +35,7 @@ const SAMPLE_LISTINGS = [
     id: 3,
     title: "Modern Downtown Apartment",
     location: "123 Main St, New York",
-    price: 450000, // Price as a number
+    price: 450000, 
     beds: 4,
     baths: 2,
     featured:true,
@@ -47,7 +47,7 @@ const SAMPLE_LISTINGS = [
     id: 4,
     title: "Modern Downtown Apartment",
     location: "123 Main St, New York",
-    price: 450000, // Price as a number
+    price: 450000, 
     beds: 2,
     baths: 2,
     featured:false,
@@ -59,7 +59,7 @@ const SAMPLE_LISTINGS = [
     id: 5,
     title: "Modern Downtown Apartment",
     location: "123 Main St, New York",
-    price: 50000, // Price as a number
+    price: 50000, 
     beds: 4,
     baths: 4,
     featured:false,
@@ -71,7 +71,7 @@ const SAMPLE_LISTINGS = [
     id: 6,
     title: "Modern Downtown Apartment",
     location: "123 Main St, New York",
-    price: 30000, // Price as a number
+    price: 30000, 
     beds: 2,
     baths: 2,
     featured:true,
@@ -83,7 +83,7 @@ const SAMPLE_LISTINGS = [
     id: 7,
     title: "Modern Downtown Apartment",
     location: "123 Main St, New York",
-    price: 450000, // Price as a number
+    price: 450000, 
     beds: 1,
     baths: 1,
     featured:false,
@@ -95,7 +95,7 @@ const SAMPLE_LISTINGS = [
     id: 8,
     title: "Modern Downtown Apartment",
     location: "123 Main St, New York",
-    price: 350000, // Price as a number
+    price: 350000, 
     beds: 4,
     baths: 1,
     featured:false,
@@ -107,7 +107,7 @@ const SAMPLE_LISTINGS = [
     id: 9,
     title: "Modern Downtown Apartment",
     location: "123 Main St, New York",
-    price: 5000, // Price as a number
+    price: 5000, 
     beds: 2,
     baths: 1,
     featured:true,
@@ -119,7 +119,7 @@ const SAMPLE_LISTINGS = [
     id: 10,
     title: "Modern Downtown Apartment",
     location: "123 Main St, New York",
-    price: 650000, // Price as a number
+    price: 650000, 
     beds: 4,
     baths: 4,
     featured:false,
@@ -131,7 +131,7 @@ const SAMPLE_LISTINGS = [
     id: 11,
     title: "Modern Downtown Apartment",
     location: "123 Main St, New York",
-    price: 4500000, // Price as a number
+    price: 4500000, 
     beds: 1,
     baths: 4,
     featured:true,
@@ -143,7 +143,7 @@ const SAMPLE_LISTINGS = [
     id: 12,
     title: "Modern Downtown Apartment",
     location: "123 Main St, New York",
-    price: 450000, // Price as a number
+    price: 450000, 
     beds: 2,
     baths: 2,
     featured:true,
@@ -155,7 +155,7 @@ const SAMPLE_LISTINGS = [
     id: 13,
     title: "Modern Downtown Apartment",
     location: "123 Main St, New York",
-    price: 450000, // Price as a number
+    price: 450000, 
     beds: 2,
     baths: 2,
     featured:true,
@@ -177,8 +177,9 @@ export default function ListingGrid() {
     filteredAndSortedListings: [],
   });
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState('');
   const listingsPerPage = 6;
+
 
   const filterListings = useCallback((listings, filters) => {
     return listings.filter(listing => {
@@ -268,14 +269,16 @@ export default function ListingGrid() {
   }, []);
   return (
     <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8">
-      <div className="mb-6 md:mb-0 md:px-4 md:border-r md:border-gray-200 dark:md:border-gray-700 md:pr-8">
+         
+      <div className="mb-6 md:mb-0 md:px-4 lg:border-r lg:border-gray-200 dark:md:border-gray-700 md:pr-8">
         <ListingFilters 
           onFilterChange={handleFilterChange} 
           filters={listingState.filters}
         />
       </div>
+    
 
-      <div className="lg:col-span-3 ml-0 lg:ml-10 space-y-6">
+      <div className="lg:col-span-3 ml-0  space-y-6">
         <div className="flex justify-between items-center bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
           <p className="text-gray-700 dark:text-gray-300">
             Showing {indexOfFirstListing + 1}-{Math.min(indexOfLastListing, listingState.filteredAndSortedListings.length)} of {listingState.filteredAndSortedListings.length} properties
@@ -306,7 +309,7 @@ export default function ListingGrid() {
             </div>
           ) : (
             currentListings.map((listing) => (
-              <div key={listing.id} className="group hover:shadow-xl transition duration-300 ease-in-out transform rounded-lg overflow-hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
+              <div key={listing.id} className="group hover:shadow-xl transition duration-300 ease-in-out transform rounded-[13px] overflow-hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
                 <ListingCard listing={listing} />
               </div>
             ))

@@ -28,7 +28,7 @@ const Contact = () => {
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-indigo-600 to-blue-700 py-24 dark:from-indigo-900 dark:to-blue-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl md:text-6xl font-bold text-white text-center mb-6 tracking-tight">
+          <h1 className="text-4xl md:text-6xl  font-medium tracking-wider text-white text-center mb-6 ">
             Contact Us
           </h1>
           <p className="text-indigo-100 text-center text-lg md:text-xl max-w-2xl mx-auto font-light">
@@ -42,7 +42,7 @@ const Contact = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           {/* Contact Info Section */}
           <div className="space-y-8">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8">
+            <h2 className="text-3xl font-medium tracking-wider text-gray-900 dark:text-gray-100 mb-8">
               Contact Information
             </h2>
             <div className="grid gap-6">
@@ -71,7 +71,7 @@ const Contact = () => {
               ].map((item, index) => (
                 <div
                   key={index}
-                  className="flex items-start gap-4 bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 group hover:bg-gradient-to-r hover:from-indigo-50 hover:to-blue-50 dark:bg-gray-800 dark:hover:bg-gradient-to-r dark:hover:from-gray-700 dark:hover:to-gray-600"
+                  className="flex items-start gap-4 bg-white border border-gray-100 dark:border-gray-700 rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 group hover:bg-gradient-to-r hover:from-indigo-50 hover:to-blue-50 dark:bg-gray-800 dark:hover:bg-gradient-to-r dark:hover:from-gray-700 dark:hover:to-gray-600"
                 >
                   <div className="p-3 bg-gradient-to-br from-indigo-100 to-blue-100 rounded-xl group-hover:from-indigo-200 group-hover:to-blue-200 dark:bg-indigo-800 dark:group-hover:bg-indigo-700 transition-colors">
                     <item.Icon className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
@@ -140,11 +140,11 @@ const Contact = () => {
                     value={formData.propertyType}
                     onChange={handleChange}
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 transition-all duration-200 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-indigo-500 dark:focus:border-indigo-400"
-                  >
-                    <option value="residential">Residential</option>
-                    <option value="commercial">Commercial</option>
-                    <option value="industrial">Industrial</option>
-                    <option value="land">Land</option>
+                  >                    
+                    <option value="House">House</option>
+                    <option value="Apartment">Apartment</option>
+                    <option value="Penthouse">Penthouse</option>
+                    <option value="Townhouse">Townhouse</option>
                   </select>
                 </div>
               </div>
