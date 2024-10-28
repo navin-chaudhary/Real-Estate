@@ -144,7 +144,7 @@ const Contact = () => {
                     <option value="House">House</option>
                     <option value="Apartment">Apartment</option>
                     <option value="Penthouse">Penthouse</option>
-                    <option value="Townhouse">Townhouse</option>
+                    <option value="Villa">Villa</option>
                   </select>
                 </div>
               </div>

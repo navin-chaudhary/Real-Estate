@@ -11,7 +11,7 @@ export default function ListingFilters({ onFilterChange  }) {
     }
   });
 
-  const propertyTypes = ['house', 'apartment', 'studio', 'penthouse', 'townhouse'];
+  const propertyTypes = ['House', 'Apartment','Penthouse', 'Villa'];
 
   const handlePropertyTypeChange = (type) => {
     setFilters(prev => {

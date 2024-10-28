@@ -1,125 +1,131 @@
-"use client"
-import React, { useState } from 'react';
+"use client";
+import React, { useState, useEffect } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Search, Home, MapPin, DollarSign } from 'lucide-react';
 
 const HomeFinderHero = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [propertyType, setPropertyType] = useState('all');
+  const [isVisible, setIsVisible] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
+  const images = [
+    "/images/homepage.jpg",
+    "/images/villa.png",
+    "/images/flate.png",
+  ];
+
+  const nextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % images.length);
+  };
+
+  const prevImage = () => {
+    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
 
   return (
-    <div className="relative min-h-screen">
-      {/* Hero Section */}
-      <section className="relative bg-gray-900 min-h-[600px] lg:min-h-[800px]">
-        <div className="absolute inset-0">
-          <Image
-            src='/images/homepage.jpg'
-            alt="Dynamic city skyline"
-            className="w-full h-full object-cover"
-            width={2000}
-            height={2000}
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-gray-900 to-transparent opacity-70"></div>
-        </div>
-
-        {/* Main Content */}
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
-          <div className="pt-32 lg:pt-40 pb-12">
-            {/* Header Content */}
-            <div className="max-w-3xl">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-                Find Your Dream Home Today
-              </h1>
-              <p className="text-lg md:text-xl text-gray-300 max-w-2xl mb-8">
-                Discover your perfect home with HomeFinder - Your trusted partner in real estate. 
-                Search through thousands of listings in your desired location.
-              </p>
-            </div>
-
-            {/* Search Section */}
-            <div className="bg-white p-4 rounded-lg shadow-xl max-w-4xl">
-              <div className="flex flex-col lg:flex-row gap-4">
-                {/* Search Input */}
-                <div className="flex-1">
-                  <div className="relative">
-                    <input
-                      type="text"
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      placeholder="Enter location or keyword..."
-                      className="w-full p-4 pl-12 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                    />
-                    <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                  </div>
-                </div>
-
-                {/* Property Type Select */}
-                <div className="lg:w-48">
-                  <select
-                    value={propertyType}
-                    onChange={(e) => setPropertyType(e.target.value)}
-                    className="w-full p-4 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500"
-                  >
-                    <option value="all">All Types</option>
-                    <option value="house">House</option>
-                    <option value="apartment">Apartment</option>
-                    <option value="condo">Condo</option>
-                    <option value="townhouse">Townhouse</option>
-                  </select>
-                </div>
-
-                {/* Search Button */}
-                <button className="bg-indigo-600 text-white px-8 py-4 rounded-lg hover:bg-indigo-700 transition-colors duration-300">
-                  Search
-                </button>
-              </div>
-            </div>
-
-            {/* Quick Stats */}
-            <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl">
-              <div className="bg-white/10 backdrop-blur-md p-6 rounded-lg">
-                <Home className="text-white mb-2" size={24} />
-                <h3 className="text-white text-lg font-semibold">10,000+ Listings</h3>
-                <p className="text-gray-300">Updated daily</p>
-              </div>
-              <div className="bg-white/10 backdrop-blur-md p-6 rounded-lg">
-                <MapPin className="text-white mb-2" size={24} />
-                <h3 className="text-white text-lg font-semibold">100+ Cities</h3>
-                <p className="text-gray-300">Across the country</p>
-              </div>
-              <div className="bg-white/10 backdrop-blur-md p-6 rounded-lg">
-                <DollarSign className="text-white mb-2" size={24} />
-                <h3 className="text-white text-lg font-semibold">Best Deals</h3>
-                <p className="text-gray-300">Guaranteed prices</p>
-              </div>
+    <div className="bg-[#f8fafc] min-h-screen flex items-center dark:bg-gray-900">
+      <div className="container mx-auto px-4 md:px-0">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          <div
+            className={`space-y-6 md:pl-0 transition-all duration-1000 transform lg:ml-8
+          ${
+            isVisible
+              ? "translate-x-0 opacity-100"
+              : "-translate-x-20 opacity-0"
+          }`}
+          >
+            <h1
+              className="text-4xl pt-2 md:text-4xl lg:text-6xl font-bold text-gray-900 md:ml-0 
+            animate-fade-in-up dark:text-white"
+            >
+              Find Your Dream Home Today.
+            </h1>
+            <p className="text-gray-600 dark:text-white animate-fade-in-up delay-200">
+              Discover your ideal home with HomeFinder. Browse thousands of
+              quality listings with detailed photos and floor plans. Our smart
+              search tools help you filter by price, location, and amenities.
+              Whether you want a city apartment or suburban house, find your
+              perfect match today.
+            </p>
+            <div className="flex space-x-4  animate-fade-in-up delay-300">
+              <Link
+              href={'/listings'}
+                className="px-6 py-2 border-2 border-teal-500 text-teal-500 
+              rounded-lg transform transition-all duration-300 hover:scale-105
+              hover:bg-teal-500 hover:text-white hover:shadow-lg"
+              >
+                Explore
+              </Link>
+              <Link
+              href={'/add-property'}
+                className="px-6 py-2 bg-teal-500 text-white rounded-lg 
+              transform transition-all duration-300 hover:scale-105
+              hover:bg-teal-600 hover:shadow-lg"
+              >
+                Add Property
+              </Link>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Call to Action Buttons */}
-      <div className="bg-gray-50 py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Link
-              href="/property"
-              className="inline-flex items-center justify-center px-8 py-4 bg-indigo-600 text-white text-lg font-semibold rounded-md shadow-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out"
-            >
-              Explore Properties
-            </Link>
-            <Link
-              href="/sell"
-              className="inline-flex items-center justify-center px-8 py-4 border-2 border-indigo-600 text-indigo-600 text-lg font-semibold rounded-md shadow-lg hover:bg-indigo-600 hover:text-white transition-all duration-300 ease-in-out"
-            >
-              List Your Property
-            </Link>
+          <div className="relative group mb-4">
+            <div className="overflow-hidden rounded-lg">
+              <div className="relative w-full aspect-square">
+                {images.map((img, index) => (
+                  <div
+                    key={index}
+                    className={`absolute w-full h-full transition-opacity duration-500 ease-in-out
+                      ${
+                        currentImageIndex === index ? "opacity-1" : "opacity-0"
+                      }`}
+                  >
+                    <Image
+                      src={img}
+                      alt={`Product ${index + 1}`}
+                      className="w-full h-full   object-cover"
+                      height={1000}
+                      width={1000}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="absolute bottom-4 right-4 flex space-x-2">
+              <button
+                onClick={prevImage}
+                className="bg-white/80 rounded-full p-2 opacity-85  transition-opacity"
+              >
+                <ChevronLeft className="w-6 h-6 text-gray-800" />
+              </button>
+              <button
+                onClick={nextImage}
+                className="bg-[#14B8A6] rounded-full p-2 opacity-85  transition-opacity"
+              >
+                <ChevronRight className="w-6 h-6 text-gray-800" />
+              </button>
+            </div>
+
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
+              {images.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentImageIndex(index)}
+                  className={`w-2 h-2 rounded-full transition-colors
+                    ${
+                      currentImageIndex === index
+                        ? "bg-teal-500"
+                        : "bg-gray-300"
+                    }`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
 };
-
 export default HomeFinderHero;
