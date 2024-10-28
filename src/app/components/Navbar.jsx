@@ -39,13 +39,13 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50 transition-colors duration-300 ease-in-out bg-gradient-to-b bg-[#d5cfcf] dark:from-gray-900 dark:to-gray-800 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
+          
           <div className="flex-shrink-0 transform">
             <Link href="/" className="flex items-center">
               <Image
                 src="/images/logo.png"
                 alt="Logo"
-                width={60}
+                width={50}
                 height={40}
                 className="object-contain rounded-lg"
                 priority
@@ -53,7 +53,7 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
+         
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
               <Link
@@ -65,11 +65,9 @@ export default function Navbar() {
                 <span className="absolute inset-x-0 bottom-0 h-0.5 bg-blue-600 transform scale-x-0 origin-left transition-transform duration-300 ease-out group-hover:scale-x-100"></span>
               </Link>
             ))}
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-all duration-200 transform hover:scale-105 hover:shadow-lg text-sm lg:text-base tracking-wider uppercase  font-medium">
-              List Property
-            </button>
             
-            {/* Theme Toggle Button */}
+            
+           
             <button
               onClick={() => setIsDark(!isDark)}
               className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
@@ -83,7 +81,7 @@ export default function Navbar() {
             </button>
           </div>
 
-          {/* Mobile menu button */}
+         
           <div className="md:hidden flex items-center space-x-4">
             <button
               onClick={() => setIsDark(!isDark)}
@@ -109,7 +107,7 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Mobile Navigation */}
+       
         <div
           className={`md:hidden transition-all duration-300 ease-in-out ${
             isOpen
@@ -128,9 +126,7 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <button className="w-full text-left bg-blue-600 text-white px-3 py-2 rounded-md hover:bg-blue-700 transition-all duration-200 transform hover:translate-x-2 text-base font-medium mt-2">
-              List Property
-            </button>
+            
           </div>
         </div>
       </div>

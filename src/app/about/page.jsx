@@ -78,7 +78,7 @@ const AboutPage = () => {
       
       </div>
 
-      {/* Features Section with Hover Animations */}
+      
       <div className="py-20 bg-gray-100 dark:bg-gray-900">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16 animate-fade-in">
@@ -107,7 +107,7 @@ const AboutPage = () => {
         </div>
       </div>
 
-      {/* Mentor Team Section */}
+      
       <div className="py-20 bg-white dark:bg-gray-800">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
@@ -125,7 +125,7 @@ const AboutPage = () => {
              key={index}
              className="relative group bg-white dark:bg-gray-800 rounded-2xl shadow-md hover:shadow-2xl transform transition-all duration-300 hover:scale-102 overflow-hidden max-w-sm mx-auto"
            >
-             {/* Image Container */}
+             
              <div className="relative h-80 mb-6 overflow-hidden">
                <Image
                  width={1000}
@@ -137,7 +137,7 @@ const AboutPage = () => {
                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
              </div>
        
-             {/* Content Container */}
+             
              <div className="px-6 pb-6">
                <h3 className="text-2xl font-bold text-gray-900 dark:text-white text-center mb-2 transition-colors">
                  {mentor.name}
@@ -147,7 +147,7 @@ const AboutPage = () => {
                  {mentor.role}
                </p>
        
-               {/* Specialties Container */}
+               
                <div className="flex flex-wrap justify-center gap-2 ">
                  {mentor.specialties.map((specialty, idx) => (
                    <span
@@ -165,7 +165,7 @@ const AboutPage = () => {
         </div>
       </div>
 
-      {/* Animated Stats Section */}
+      
       <div className="py-16 bg-gray-100 dark:bg-gray-900">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8">
@@ -184,7 +184,7 @@ const AboutPage = () => {
         </div>
       </div>
 
-      {/* Contact Section with Animation */}
+      
       <div className="py-20 bg-white dark:bg-gray-800">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center transform transition-all duration-300 ">

@@ -1,12 +1,11 @@
-"use client"
+"use client";
 import { useState } from "react";
 import "react-loading-skeleton/dist/skeleton.css";
 import { SAMPLE_LISTINGS } from "../listings/data";
 
-// Props definition - this helps React understand the expected props
 const AddListingForm = (props) => {
   const { onAddListing, onClose } = props;
-  
+
   const [newListing, setNewListing] = useState({
     title: "",
     location: "",
@@ -19,10 +18,55 @@ const AddListingForm = (props) => {
     images: [],
   });
 
-  const maxId = Math.max(...SAMPLE_LISTINGS.map(listing => listing.id), 0);
+  const [errors, setErrors] = useState({});
 
+  const validateInput = (field, value) => {
+    switch (field) {
+      case 'beds':
+        return value >= 1 ? "" : "Minimum 1 bedroom required";
+      case 'baths':
+        return value >= 1 ? "" : "Minimum 1 bathroom required";
+      case 'price':
+        return value >= 1000 ? "" : "Minimum price is ₹1,000";
+      case 'sqft':
+        return value >= 100 ? "" : "Minimum 100 square feet required";
+      default:
+        return "";
+    }
+  };
+
+  const handleInputChange = (field, value) => {
+    const error = validateInput(field, value);
+    setErrors(prev => ({
+      ...prev,
+      [field]: error
+    }));
+    setNewListing(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+
+  const maxId = Math.max(...SAMPLE_LISTINGS.map((listing) => listing.id), 0);
+  
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    
+    const newErrors = {
+      beds: validateInput('beds', parseInt(newListing.beds)),
+      baths: validateInput('baths', parseInt(newListing.baths)),
+      price: validateInput('price', parseInt(newListing.price)),
+      sqft: validateInput('sqft', parseInt(newListing.sqft))
+    };
+
+    setErrors(newErrors);
+
+    
+    if (Object.values(newErrors).some(error => error !== "")) {
+      return;
+    }
+
     const listingWithId = {
       ...newListing,
       id: maxId + 1,
@@ -31,9 +75,10 @@ const AddListingForm = (props) => {
       baths: parseInt(newListing.baths) || 0,
       sqft: parseInt(newListing.sqft) || 0,
     };
+    
+    localStorage.setItem(`listing_${listingWithId.id}`, JSON.stringify(listingWithId));
     onAddListing(listingWithId);
-
-    // Reset the form after submission
+    
     setNewListing({
       title: "",
       location: "",
@@ -49,88 +94,146 @@ const AddListingForm = (props) => {
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
-    const imageUrls = files.map((file) => URL.createObjectURL(file));
-    setNewListing((prev) => ({
-      ...prev,
-      images: imageUrls,
-    }));
+    const imageReaders = files.map((file) => {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          resolve(reader.result);
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    });
+  
+    Promise.all(imageReaders).then((imageUrls) => {
+      setNewListing((prev) => ({
+        ...prev,
+        images: imageUrls,
+      }));
+    });
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      {/* Title Field */}
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-4 dark:bg-gray-800 dark:text-white p-4 rounded-lg"
+    >
       <div>
-        <label className="block text-sm font-medium mb-1">Title</label>
+        <label className="block text-sm font-medium mb-1 text-black dark:text-gray-300">
+          Title
+        </label>
         <input
           required
           value={newListing.title}
-          onChange={(e) => setNewListing({ ...newListing, title: e.target.value })}
-          className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+          onChange={(e) =>
+            setNewListing({ ...newListing, title: e.target.value })
+          }
+          className="w-full px-3 py-2 border rounded-lg text-black dark:bg-gray-300 dark:border-gray-600"
         />
       </div>
-      {/* Location Field */}
+      
       <div>
-        <label className="block text-sm font-medium mb-1">Location</label>
+        <label className="block text-sm font-medium mb-1 text-black dark:text-gray-300">
+          Location
+        </label>
         <input
           required
           value={newListing.location}
-          onChange={(e) => setNewListing({ ...newListing, location: e.target.value })}
-          className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+          onChange={(e) =>
+            setNewListing({ ...newListing, location: e.target.value })
+          }
+          className="w-full px-3 py-2 border rounded-lg text-black dark:bg-gray-300 dark:border-gray-600"
         />
       </div>
-      {/* Price and Square Feet Fields */}
+      
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium mb-1">Price (₹)</label>
+          <label className="block text-sm font-medium mb-1 text-black dark:text-gray-300">
+            Price (₹)
+          </label>
           <input
             required
             type="number"
+            min="1000"
             value={newListing.price}
-            onChange={(e) => setNewListing({ ...newListing, price: e.target.value })}
-            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+            onChange={(e) => handleInputChange('price', e.target.value)}
+            className={`w-full px-3 py-2 border rounded-lg text-black dark:bg-gray-300 dark:border-gray-600 ${
+              errors.price ? 'border-red-500' : ''
+            }`}
           />
+          {errors.price && (
+            <p className="text-red-500 text-xs mt-1">{errors.price}</p>
+          )}
         </div>
         <div>
-          <label className="block text-sm font-medium mb-1">Square Feet</label>
+          <label className="block text-sm font-medium mb-1 text-black dark:text-gray-300">
+            Square Feet
+          </label>
           <input
             required
             type="number"
+            min="100"
             value={newListing.sqft}
-            onChange={(e) => setNewListing({ ...newListing, sqft: e.target.value })}
-            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+            onChange={(e) => handleInputChange('sqft', e.target.value)}
+            className={`w-full px-3 py-2 border rounded-lg text-black dark:bg-gray-300 dark:border-gray-600 ${
+              errors.sqft ? 'border-red-500' : ''
+            }`}
           />
+          {errors.sqft && (
+            <p className="text-red-500 text-xs mt-1">{errors.sqft}</p>
+          )}
         </div>
       </div>
-      {/* Bedrooms and Bathrooms Fields */}
+      
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium mb-1">Bedrooms</label>
+          <label className="block text-sm font-medium mb-1 text-black dark:text-gray-300">
+            Bedrooms
+          </label>
           <input
             required
             type="number"
+            min="1"
             value={newListing.beds}
-            onChange={(e) => setNewListing({ ...newListing, beds: e.target.value })}
-            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+            onChange={(e) => handleInputChange('beds', e.target.value)}
+            className={`w-full px-3 py-2 border rounded-lg text-black dark:bg-gray-300 dark:border-gray-600 ${
+              errors.beds ? 'border-red-500' : ''
+            }`}
           />
+          {errors.beds && (
+            <p className="text-red-500 text-xs mt-1">{errors.beds}</p>
+          )}
         </div>
         <div>
-          <label className="block text-sm font-medium mb-1">Bathrooms</label>
+          <label className="block text-sm font-medium mb-1 text-black dark:text-gray-300">
+            Bathrooms
+          </label>
           <input
             required
             type="number"
+            min="1"
             value={newListing.baths}
-            onChange={(e) => setNewListing({ ...newListing, baths: e.target.value })}
-            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+            onChange={(e) => handleInputChange('baths', e.target.value)}
+            className={`w-full px-3 py-2 border rounded-lg text-black dark:bg-gray-300 dark:border-gray-600 ${
+              errors.baths ? 'border-red-500' : ''
+            }`}
           />
+          {errors.baths && (
+            <p className="text-red-500 text-xs mt-1">{errors.baths}</p>
+          )}
         </div>
       </div>
-      {/* Property Type Field */}
+
       <div>
-        <label className="block text-sm font-medium mb-1">Property Type</label>
+        <label className="block text-sm font-medium mb-1 text-black dark:text-gray-300">
+          Property Type
+        </label>
         <select
           value={newListing.type}
-          onChange={(e) => setNewListing({ ...newListing, type: e.target.value })}
-          className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+          onChange={(e) =>
+            setNewListing({ ...newListing, type: e.target.value })
+          }
+          className="w-full px-3 py-2 border rounded-lg text-black dark:bg-gray-300 dark:border-gray-600"
         >
           <option value="Apartment">Apartment</option>
           <option value="House">House</option>
@@ -139,39 +242,31 @@ const AddListingForm = (props) => {
           <option value="Flat">Flat</option>
         </select>
       </div>
-      {/* Image Upload */}
+
       <div>
-        <label className="block text-sm font-medium mb-1">Upload Images</label>
+        <label className="block text-sm font-medium mb-1 text-black dark:text-gray-300">
+          Upload Images
+        </label>
         <input
           type="file"
           accept="image/*"
           multiple
           onChange={handleImageChange}
-          className="w-full py-2"
+          className="w-full py-2 text-black dark:text-gray-300"
         />
       </div>
-      {/* Featured Checkbox */}
-      <div className="flex items-center space-x-2">
-        <input
-          type="checkbox"
-          checked={newListing.featured}
-          onChange={(e) => setNewListing({ ...newListing, featured: e.target.checked })}
-          className="rounded"
-        />
-        <label className="text-sm">Featured Property</label>
-      </div>
-      {/* Form Actions */}
+
       <div className="flex justify-end space-x-2 pt-4">
         <button
           type="button"
           onClick={onClose}
-          className="px-4 py-2 border rounded-lg hover:bg-gray-100"
+          className="px-4 py-2 border rounded-lg text-black dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:border-gray-600"
         >
           Cancel
         </button>
         <button
           type="submit"
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600"
         >
           Add Listing
         </button>

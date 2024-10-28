@@ -11,7 +11,7 @@ export default function ListingFilters({ onFilterChange  }) {
     }
   });
 
-  const propertyTypes = ['House', 'Apartment','Penthouse', 'Villa'];
+  const propertyTypes = ['House', 'Apartment','Penthouse', 'Villa','Flat'];
 
   const handlePropertyTypeChange = (type) => {
     setFilters(prev => {
@@ -53,7 +53,7 @@ export default function ListingFilters({ onFilterChange  }) {
       </h3>
 
       <div className="space-y-6">
-        {/* Property Type Section */}
+       
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 lg:text-xl mb-3">
             Property Type
@@ -73,7 +73,7 @@ export default function ListingFilters({ onFilterChange  }) {
           </div>
         </div>
 
-        {/* Bedrooms Section */}
+       
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 lg:text-xl mb-2">
             Bedrooms

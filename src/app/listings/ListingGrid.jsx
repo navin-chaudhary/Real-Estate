@@ -179,7 +179,7 @@ const Modal = ({ isOpen, onClose, children, title }) => {
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center">
       <div className="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-md mx-4">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold">{title}</h2>
+          <h2 className="text-xl font-semibold text-black dark:text-gray-300">{title}</h2>
           <button
             onClick={onClose}
             className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
@@ -216,9 +216,9 @@ export default function ListingGrid() {
         newListing.id = maxId + 1;
 
         const updatedListings = [...prevListings, newListing];
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedListings)); // Save updated listings to local storage
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedListings));
         
-        return updatedListings; // Returning the updated listings will trigger a re-render
+        return updatedListings; 
     });
 };
 
@@ -413,7 +413,7 @@ export default function ListingGrid() {
           ) : (
             currentListings.map((listing, index) => (
               <div
-                key={`${listing.id}-${index}`} // Unique key by combining id and index
+                key={`${listing.id}-${index}`} 
                 className="group hover:shadow-xl transition duration-300 ease-in-out transform rounded-[13px] overflow-hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700"
               >
                 <ListingCard listing={listing} />

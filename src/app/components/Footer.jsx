@@ -8,7 +8,7 @@ const Footer = () => {
     QuickLinks: [
       { name: 'HOME', href: '/' },
       { name: 'ABOUT', href: '/about' },
-      { name: 'PROPERTY', href: '/property' },
+      { name: 'PROPERTY', href: '/listings' },
       { name: 'CONTACT US', href: '/contact' },
     ],
     Services: [
@@ -48,7 +48,8 @@ const Footer = () => {
             <Image
               src="/images/logo.png"
               alt="Logo"
-              fill
+              width={120}
+              height={120}
               className="w-32 h-16 scale-150 object-contain rounded-full"
             />
           </div>

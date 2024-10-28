@@ -30,7 +30,7 @@ const ListingCard = ({ listing, onNavigate }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Image Section */}
+     
       <div className="relative h-64 overflow-hidden">
         {listing.images?.[0] ? (
           <div className="relative w-full h-full">
@@ -38,7 +38,7 @@ const ListingCard = ({ listing, onNavigate }) => {
               src={listing.images[0]}
               width={1000}
               height={1000}
-              alt={listing.title} // Consider making this more descriptive
+              alt={listing.title} 
               className={`w-full h-full object-cover transition-transform duration-500 
                          ${isHovered ? 'scale-110' : 'scale-100'}`}
             />)}
@@ -51,21 +51,21 @@ const ListingCard = ({ listing, onNavigate }) => {
           </div>
         )}
 
-        {/* Price Tag */}
+       
         <div className="absolute bottom-4 left-4 bg-white/95 dark:bg-gray-900/95 
                        backdrop-blur-sm text-blue-600 dark:text-blue-400 px-4 py-2 
                        rounded-lg font-bold shadow-lg">
           {formatPrice(listing.price)}
         </div>
 
-        {/* Property Type Badge */}
+       
         <div className="absolute top-4 left-4 bg-gradient-to-r from-gray-900/90 to-gray-800/90 
                        text-white px-3 py-1 rounded-full text-sm font-medium">
           {listing.type}
         </div>
       </div>
 
-      {/* Content Section */}
+      
       <div className="p-4">
         <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 
                       line-clamp-1 group-hover:text-blue-600 
@@ -93,7 +93,7 @@ const ListingCard = ({ listing, onNavigate }) => {
           </div>
         </div>
 
-        {/* View Details Button */}
+        
         <div className="mt-4 transition-all duration-300">
           <Link 
            href={`/listings/${listing.id}`}

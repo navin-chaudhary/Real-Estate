@@ -60,7 +60,7 @@ const HomeFinderHero = () => {
                 Explore
               </Link>
               <Link
-              href={'/add-property'}
+              href={'/listings'}
                 className="px-6 py-2 bg-teal-500 text-white rounded-lg 
               transform transition-all duration-300 hover:scale-105
               hover:bg-teal-600 hover:shadow-lg"
