@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Facebook, Instagram, Twitter, Github, Youtube, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
+import Image from 'next/image';
 
 const Footer = () => {
   const navigation = {
@@ -44,9 +45,10 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="mb-12 flex flex-col items-center space-y-6">
           <div className="transform  transition-transform duration-300">
-            <img
+            <Image
               src="/images/logo.png"
               alt="Logo"
+              fill
               className="w-32 h-16 scale-150 object-contain rounded-full"
             />
           </div>
