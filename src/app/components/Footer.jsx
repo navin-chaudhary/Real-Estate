@@ -110,7 +110,7 @@ const Footer = () => {
         <div className="border-t border-gray-200 dark:border-gray-700 mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-gray-500 dark:text-gray-400 text-sm hover:text-gray-700 dark:hover:text-gray-300 transition-colors duration-200">
-              © {new Date().getFullYear()} Your Company, Inc. All rights reserved.
+              © {new Date().getFullYear()} Home Finder. All rights reserved.
             </p>
           </div>
         </div>
