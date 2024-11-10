@@ -1,4 +1,4 @@
-import Hero from './components/Homepage'
+import Hero from './components/Hero'
 import FeaturedListings from './components/FeaturedListings'
 export default function Home() {
   const features = [
